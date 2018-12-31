@@ -2,6 +2,24 @@
   text-align: center;
 }
 
+.gridList {
+  width: 500;
+  height: 450
+}
+.icon {
+  color: 'rgba(255, 255, 255, 0.54)'
+}
+
+.gridTileStyle {
+  position: 'relative';
+  float: 'left';
+  width: '100%';
+  min-height: '400px';
+  min-width: '664px';
+  overflow: 'hidden';
+  height: '100% !important'
+}
+
 div, button {
   margin: 10px;
 }
