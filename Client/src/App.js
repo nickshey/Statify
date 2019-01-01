@@ -152,7 +152,7 @@ class App extends Component {
             >
               <Grid item>
                 <Typography variant="h2" color="inherit">
-                  Statify
+                  MySpotify
                 </Typography>
               </Grid>
               {/*<Grid item>
