@@ -31,7 +31,8 @@ class App extends Component {
       nowPlaying: { name: 'Not Checked', albumArt: 'http://www.scottishculture.org/themes/scottishculture/images/music_placeholder.png?' },
       artistDetails: {artists: {items: []}},
       trackDetails: {tracks: {items: []}},
-      auth: token
+      auth: token,
+      portemail: 'http://localhost:' + (process.env.PORT || 8888)
     }
   }
   getHashParams() {
@@ -162,7 +163,7 @@ class App extends Component {
         </AppBar>
         <br />
         {!this.state.loggedIn &&
-        <a href='http://localhost:8888'> <img src={login} style={{ height: 35 }}  /> </a> }
+        <a href={this.state.portemail}> <img src={login} style={{ height: 35 }}  /> </a> }
         <div style={{"color":"white"}}>
           Now Playing: { this.state.nowPlaying.name }
         </div>
