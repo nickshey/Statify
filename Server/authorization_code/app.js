@@ -14,6 +14,10 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 var client_id = '22e020a622e44cdcbfa58f0cdbb04fe9'; // Your client id
 var client_secret = 'b210e03d51014ed3a9fa7d16fd58c4bf'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
