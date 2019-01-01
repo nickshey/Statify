@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import login from './login.svg';
 import spotify from './spotify.png';
-import user from './user.png'
+import twitter from './twitter.png';
+import github from './github.png';
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -12,7 +13,7 @@ import Avatar from '@material-ui/core/Avatar'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 import GridListTileBar from '@material-ui/core/GridListTileBar'
-import Icon from '@material-ui/core/Icon'
+
 
 import SpotifyWebApi from 'spotify-web-api-js';
 const spotifyApi = new SpotifyWebApi();
@@ -27,7 +28,7 @@ class App extends Component {
     }
     this.state = {
       loggedIn: token ? true : false,
-      nowPlaying: { name: 'Not Checked', albumArt: '' },
+      nowPlaying: { name: 'Not Checked', albumArt: 'http://www.scottishculture.org/themes/scottishculture/images/music_placeholder.png?' },
       artistDetails: {artists: {items: []}},
       trackDetails: {tracks: {items: []}},
       auth: token
@@ -149,19 +150,20 @@ class App extends Component {
               spacing={24}
             >
               <Grid item>
-                <Typography variant="h5" color="inherit">
+                <Typography variant="h2" color="inherit">
                   Statify
                 </Typography>
               </Grid>
-              <Grid item>
+              {/*<Grid item>
                 <Avatar src={user} />
-              </Grid>
+              </Grid>*/}
             </Grid>
           </Toolbar>
         </AppBar>
         <br />
-        <a href='http://localhost:8888'> <img src={login} style={{ height: 35 }}  /> </a>
-        <div>
+        {!this.state.loggedIn &&
+        <a href='http://localhost:8888'> <img src={login} style={{ height: 35 }}  /> </a> }
+        <div style={{"color":"white"}}>
           Now Playing: { this.state.nowPlaying.name }
         </div>
         <div>
@@ -177,13 +179,14 @@ class App extends Component {
         <br />
         <Grid               
           container 
-          spacing={24}
+          spacing={16}
           justify="center"
         >
           <Grid item>
             { this.state.loggedIn &&
             <Button variant="contained" color="primary" onClick={() => this.getShortTerm()}>
                 Show Short Term
+                (4 weeks)
             </Button>
             }
           </Grid>
@@ -191,6 +194,7 @@ class App extends Component {
             { this.state.loggedIn &&
             <Button variant="contained" color="primary" onClick={() => this.getMediumTerm()}>
                 Show Medium Term
+                (6 months)
             </Button>
             }
           </Grid>
@@ -198,6 +202,7 @@ class App extends Component {
             { this.state.loggedIn &&
             <Button variant="contained" color="primary" onClick={() => this.getLongTerm()}>
                 Show Long Term
+                (Years)
             </Button>
             }
           </Grid>
@@ -206,6 +211,7 @@ class App extends Component {
 
         {/*RENDER ARTISTS AND TRACKS DATA*/}
           <div className="root">
+            <h1 style={{"color":"white"}}> ARTISTS </h1>
             <GridList className="gridList">
               {this.state.artistDetails.artists.items.map((artist, index) => (
                 <GridListTile key={artist.name} style ={{"height":"300px", "width":"300px"}}>
@@ -224,6 +230,7 @@ class App extends Component {
             </GridList>
           </div>
           <div className="root">
+            <h1 style={{"color":"white"}}> TRACKS </h1>
             <GridList className="gridList">
               {this.state.trackDetails.tracks.items.map((track, index) => (
                 <GridListTile key={track.name} style ={{"height":"300px", "width":"300px"}}>
@@ -242,6 +249,42 @@ class App extends Component {
               ))}
             </GridList>
           </div>
+          <AppBar position="static" style={{"background-color": "#1db954"}}>
+          <Toolbar>
+            <Grid
+              justify="space-between" // Add it here :)
+              container 
+              spacing={24}
+              style={{"justifyContent": "center"}}
+            >
+              <Grid item>
+              <Typography variant="body2" color="inherit">
+                  Built by Nojan Sheybani
+                </Typography>
+                <Typography variant="body2" color="inherit">
+                  All data belongs to Spotify. This website is not endorsed by Spotify.
+                </Typography>
+                <Typography variant="body2" color="inherit">
+                  Contact me: nds4jp@virginia.edu
+                </Typography>
+                <Typography>
+                  <a href="https://twitter.com/nojan12" target="_blank"> 
+                    <img src={twitter} style={{"width":"20px", "height":"20px"}}/>
+                  </a>
+                  <a href="https://github.com/nickshey/Statify" target="_blank"> 
+                    <img src={github} style={{"width":"20px", "height":"20px"}}/>
+                  </a>
+                </Typography>
+                <a href="https://donorbox.org/donate-if-ya-want" target="_blank">
+                  <img src="https://d1iczxrky3cnb2.cloudfront.net/button-small-blue.png" />
+                </a>
+              </Grid>
+              {/*<Grid item>
+                <Avatar src={user} />
+              </Grid>*/}
+            </Grid>
+          </Toolbar>
+        </AppBar>
         {/*
         <div class="left-half">
         <h1> Artists </h1>
