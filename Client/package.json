@@ -11,6 +11,9 @@
     "react-sky": "^1.1.0",
     "spotify-web-api-js": "^1.1.1"
   },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "devDependencies": {
     "react-scripts": "2.1.2"
   },
