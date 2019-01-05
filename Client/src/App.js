@@ -32,7 +32,7 @@ class App extends Component {
       artistDetails: {artists: {items: []}},
       trackDetails: {tracks: {items: []}},
       auth: token,
-      portemail: 'http://localhost:' + (process.env.PORT || 81)
+      portemail: 'http://localhost:81'
     }
   }
   getHashParams() {
@@ -163,7 +163,7 @@ class App extends Component {
         </AppBar>
         <br />
         {!this.state.loggedIn &&
-        <a href={this.state.portemail}> <img src={login} style={{ height: 35 }}  /> </a> }
+        <a href="http://localhost:81"> <img src={login} style={{ height: 35 }}  /> </a> }
         <div style={{"color":"white"}}>
           Now Playing: { this.state.nowPlaying.name }
         </div>
@@ -269,7 +269,7 @@ class App extends Component {
                   Contact me: nds4jp@virginia.edu
                 </Typography>
                 <Typography>
-                  <a href="https://twitter.com/nojan12" target="_blank"> 
+                  <a href="https://google.com" target="_blank"> 
                     <img src={twitter} style={{"width":"20px", "height":"20px"}}/>
                   </a>
                   <a href="https://github.com/nickshey/Statify" target="_blank"> 
