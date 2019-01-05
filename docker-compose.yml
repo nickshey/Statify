@@ -1,0 +1,14 @@
+version: '3'
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    ports:
+      - "81:8888"
