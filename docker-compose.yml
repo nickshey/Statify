@@ -11,4 +11,4 @@ services:
       context: .
       dockerfile: Dockerfile.node
     ports:
-      - "81:8888"
+      - "81:81"

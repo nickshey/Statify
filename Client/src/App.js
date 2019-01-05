@@ -32,7 +32,7 @@ class App extends Component {
       artistDetails: {artists: {items: []}},
       trackDetails: {tracks: {items: []}},
       auth: token,
-      portemail: 'http://localhost:' + (process.env.PORT || 8888)
+      portemail: 'http://localhost:' + (process.env.PORT || 81)
     }
   }
   getHashParams() {
