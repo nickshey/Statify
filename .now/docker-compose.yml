@@ -1,0 +1,19 @@
+version: '3'
+services:
+  client:
+    build: ../Client
+    ports:
+      - '80:80'
+    restart: on-failure
+    links:
+      - server
+    depends_on:
+      - server
+    environment:
+      NOW_HOST_SERVER: host.docker.internal
+      NOW_PORT_SERVER: '81'
+  server:
+    build: ../Server
+    ports:
+      - '81:81'
+    environment: null
