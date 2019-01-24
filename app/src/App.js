@@ -17,6 +17,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar'
 
 import SpotifyWebApi from 'spotify-web-api-js';
 const spotifyApi = new SpotifyWebApi();
+var profilePic = "nojan";
 
 class App extends Component {
   constructor(){
@@ -32,7 +33,9 @@ class App extends Component {
       artistDetails: {artists: {items: []}},
       trackDetails: {tracks: {items: []}},
       auth: token,
-      portemail: 'http://localhost:81'
+      portemail: 'http://localhost:81',
+      redirect: 'https://myspotify.netlify.com/',
+      user: {userinfo: {info: []}}
     }
   }
   getHashParams() {
@@ -48,9 +51,21 @@ class App extends Component {
   }
 
   componentDidMount(){
+    var redirect = this.state.redirect
     if(!this.state.loggedIn){
-      window.location.href = 'https://accounts.spotify.com/authorize?client_id=22e020a622e44cdcbfa58f0cdbb04fe9&scope=playlist-read-private%20playlist-read-collaborative%20playlist-modify-public%20user-read-recently-played%20playlist-modify-private%20ugc-image-upload%20user-follow-modify%20user-follow-read%20user-library-read%20user-library-modify%20user-read-private%20user-read-email%20user-top-read%20user-read-playback-state&response_type=token&redirect_uri=https://myspotify.netlify.com/&show_dialog=true'; 
+      window.location.href = 'https://accounts.spotify.com/authorize?client_id=22e020a622e44cdcbfa58f0cdbb04fe9&scope=playlist-read-private%20playlist-read-collaborative%20playlist-modify-public%20user-read-recently-played%20playlist-modify-private%20ugc-image-upload%20user-follow-modify%20user-follow-read%20user-library-read%20user-library-modify%20user-read-private%20user-read-email%20user-top-read%20user-read-playback-state%20user-read-birthdate&response_type=token&redirect_uri='+ redirect +'&show_dialog=true'; 
     }
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "https://api.spotify.com/v1/me", false);
+    xmlHttp.setRequestHeader("Accept", "application/json");
+    xmlHttp.setRequestHeader("Content-Type", "application/json");
+    xmlHttp.setRequestHeader("Authorization", "Bearer " + this.state.auth); // true for asynchronous 
+    xmlHttp.send(null);
+    if(xmlHttp.response > 400)
+      alert("please log in")
+    var data = JSON.parse(xmlHttp.responseText);
+    console.log(data);
+    profilePic = data.images[0].url;
   }
 
   getNowPlaying(){
@@ -149,6 +164,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {/*RENDER TITLE BAR*/}
         <AppBar position="static" style={{"background-color": "#1db954"}}>
           <Toolbar>
             <Grid
@@ -161,13 +177,15 @@ class App extends Component {
                   MySpotify
                 </Typography>
               </Grid>
-              {/*<Grid item>
-                <Avatar src={user} />
-              </Grid>*/}
+              <Grid item>
+                <Avatar src={profilePic} />
+              </Grid>
             </Grid>
           </Toolbar>
         </AppBar>
         <br />
+
+        {/*RENDER NOW PLAYING AND BUTTONS*/}
         <div style={{"color":"white"}}>
           Now Playing: { this.state.nowPlaying.name }
         </div>
@@ -248,7 +266,7 @@ class App extends Component {
           <AppBar position="static" style={{"background-color": "#1db954"}}>
           <Toolbar>
             <Grid
-              justify="space-between" // Add it here :)
+              justify="space-between"
               container 
               spacing={24}
               style={{"justifyContent": "center"}}
@@ -275,43 +293,9 @@ class App extends Component {
                   <img src="https://d1iczxrky3cnb2.cloudfront.net/button-small-blue.png" />
                 </a>
               </Grid>
-              {/*<Grid item>
-                <Avatar src={user} />
-              </Grid>*/}
             </Grid>
           </Toolbar>
         </AppBar>
-        {/*
-        <div class="left-half">
-        <h1> Artists </h1>
-        {this.state.artistDetails.artists.items.map(artist => (
-          <div>
-              { artist.images[0] &&
-              <div>
-              <img src={artist.images[0].url} style={{ height: 150, width: 150 }}/> <br />
-              </div>
-              }
-              <a href={artist.uri}> {artist.name} </a>
-              <br />
-              <br />
-          </div>
-        ))}
-        </div>
-        <div class="right-half">
-        <h1> Tracks </h1>
-        {this.state.trackDetails.tracks.items.map(track => (
-          <div>
-              { track.album.images[0] &&
-              <div>
-              <img src={track.album.images[0].url} style={{ height: 150, width: 150 }}/> <br />
-              </div>
-              }
-              <a href={track.uri}> {track.name} </a>
-              <p> {track.artists[0].name} </p>
-          </div>
-        ))}
-        </div>
-            */}
       </div>
     );
   }
