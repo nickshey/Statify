@@ -33,7 +33,6 @@ class App extends Component {
       artistDetails: {artists: {items: []}},
       trackDetails: {tracks: {items: []}},
       auth: token,
-      portemail: 'http://localhost:81',
       redirect: 'http://myspotify.xyz',
       user: {userinfo: {info: []}}
     }
@@ -69,7 +68,7 @@ class App extends Component {
   componentDidMount(){
     var redirect = this.state.redirect
     if(!this.state.loggedIn){
-      window.location.href = 'https://accounts.spotify.com/authorize?client_id=22e020a622e44cdcbfa58f0cdbb04fe9&scope=playlist-read-private%20playlist-read-collaborative%20playlist-modify-public%20user-read-recently-played%20playlist-modify-private%20ugc-image-upload%20user-follow-modify%20user-follow-read%20user-library-read%20user-library-modify%20user-read-private%20user-read-email%20user-top-read%20user-read-playback-state%20user-read-birthdate&response_type=token&redirect_uri='+ redirect +'&show_dialog=true'; 
+      window.location.href = 'https://accounts.spotify.com/authorize?client_id=22e020a622e44cdcbfa58f0cdbb04fe9&scope=user-read-recently-played%20user-top-read&response_type=token&redirect_uri='+ redirect +'&show_dialog=true'; 
     }
   }
 
