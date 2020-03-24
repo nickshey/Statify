@@ -33,7 +33,7 @@ class App extends Component {
       artistDetails: {artists: {items: []}},
       trackDetails: {tracks: {items: []}},
       auth: token,
-      redirect: 'http://myspotify.netlify.xyz',
+      redirect: 'http://myspotify.netlify.com',
       user: {userinfo: {info: []}}
     }
   }
